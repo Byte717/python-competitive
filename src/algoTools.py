@@ -990,58 +990,6 @@ class SieveOfEratosthenes:
         return self.is_prime
 
 
-class Counter:
-    def __init__(self, iterable=None):
-        self._counts = {}
-        if iterable:
-            self.update(iterable)
-
-    def update(self, iterable):
-        for item in iterable:
-            self._counts[item] = self._counts.get(item, 0) + 1
-
-    def __getitem__(self, key):
-        return self._counts.get(key, 0)
-
-    def __setitem__(self, key, value):
-        self._counts[key] = value
-
-    def __delitem__(self, key):
-        if key in self._counts:
-            del self._counts[key]
-
-    def __contains__(self, key):
-        return key in self._counts
-
-    def __len__(self):
-        return len(self._counts)
-
-    def keys(self):
-        return list(self._counts.keys())
-
-    def values(self):
-        return list(self._counts.values())
-
-    def items(self):
-        return list(self._counts.items())
-
-    def most_common(self, n=None):
-        sorted_items = sorted(self._counts.items(), key=lambda x: x[1], reverse=True)
-        return sorted_items[:n] if n else sorted_items
-
-    def subtract(self, iterable):
-        for item in iterable:
-            if item in self._counts:
-                self._counts[item] -= 1
-                if self._counts[item] == 0:
-                    del self._counts[item]
-
-    def clear(self):
-        self._counts = {}
-
-    def __repr__(self):
-        return f"Counter({self._counts})"
-
 
 class SparseTableRMQ:
     def __init__(self, array):
@@ -1064,14 +1012,6 @@ class SparseTableRMQ:
 
 
 # Algorithms
-
-def static_vars(**kwargs):
-    def decorate(func):
-        for k in kwargs:
-            setattr(func, k, kwargs[k])
-        return func
-
-    return decorate
 
 
 @lru_cache(maxsize=None)
@@ -1144,31 +1084,6 @@ def factorial(n):
     return n * factorial(n - 1)
 
 
-# fast fourier transform
-@lru_cache(maxsize=None)
-def fft(signal):
-    n = len(signal)
-    if n <= 1: return signal
-    even_fft = fft(signal[0::2])
-    odd_fft = fft(signal[1::2])
-    fft_result = [0] * n
-    for k in range(n // 2):
-        t = complex(math.cos(2 * math.pi * k / n), -math.sin(2 * math.pi * k / n)) * odd_fft[k]
-        fft_result[k] = even_fft[k] + t
-        fft_result[k + n // 2] = even_fft[k] - t
-    return fft_result
-
-
-@lru_cache(maxsize=None)
-def inverse_fft(frequencies):
-    n = len(frequencies)
-    if n <= 1: return frequencies
-    conjugate_frequencies = [f.conjugate() for f in frequencies]
-    reconstructed_signal = fft(conjugate_frequencies)
-    reconstructed_signal = [s.conjugate() / n for s in reconstructed_signal]
-    return reconstructed_signal
-
-
 @lru_cache(maxsize=None)
 def matrix_determinant(matrix):
     if len(matrix) == 1: return matrix[0][0]
@@ -1209,34 +1124,6 @@ def mod_inverse(a, m):
         x1 += m0
     return x1
 
-
-def generate_keypair(bit_length=1024):
-    """ Generate RSA keypair """
-    p = generate_large_prime(bit_length)
-    q = generate_large_prime(bit_length)
-    n = p * q
-    phi = (p - 1) * (q - 1)
-    e = 65537  # commonly used value for e (public exponent)
-    d = mod_inverse(e, phi)
-    return ((e, n), (d, n))
-
-
-@static_vars(S=SieveOfEratosthenes(25))
-def generate_large_prime(bit_length):
-    generate_large_prime.S.setN(1 << bit_length)
-    return random.choice(generate_large_prime.S.get_primes())
-
-
-def encrypt(message, public_key):
-    e, n = public_key
-    cipher = [pow(ord(char), e, n) for char in message]
-    return cipher
-
-
-def decrypt(cipher, private_key):
-    d, n = private_key
-    message = ''.join([chr(pow(char, d, n)) for char in cipher])
-    return message
 
 
 def chinese_remainder_theorem(a_list, m_list):
