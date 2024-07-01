@@ -1,6 +1,6 @@
-
 import math
 from functools import lru_cache
+
 @lru_cache(maxsize=None)
 def quicksort(arr):
     if len(arr) <= 1: return arr
@@ -121,3 +121,4 @@ def chinese_remainder_theorem(a_list, m_list):
         Mi_inverse = mod_inverse(Mi, m_list[i])
         x += a_list[i] * Mi * Mi_inverse
     return x % M
+
