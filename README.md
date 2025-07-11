@@ -76,7 +76,6 @@ pyAlgorithm/
 │   ├── DataStructs.py    # All data structures
 │   └── Funcs.py          # All utility functions and algorithms
 ├── README.md
-└── tests/                # (Optional) Unit tests
 ```
 
 ---
