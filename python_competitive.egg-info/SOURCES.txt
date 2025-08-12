@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+python-competitive/DataStructs.py
+python-competitive/__init__.py
+python-competitive/funcs.py
+python_competitive.egg-info/PKG-INFO
+python_competitive.egg-info/SOURCES.txt
+python_competitive.egg-info/dependency_links.txt
+python_competitive.egg-info/top_level.txt

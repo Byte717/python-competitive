@@ -288,7 +288,7 @@ def matrix_determinant(matrix):
 
 
 def matMul(matrix1, matrix2):
-        """
+    """
     Performs matrix multiplication between two 2D matrices.
 
     Parameters:
@@ -316,8 +316,7 @@ def matMul(matrix1, matrix2):
     - Assumes the number of columns in `matrix1` equals the number of rows in `matrix2`.
     - Raises a `ValueError` if dimensions are incompatible.
     """
-    if len(matrix1[0]) != len(matrix2):
-        raise ValueError("Incompatible matrix dimensions for multiplication.")
+    if len(matrix1[0]) != len(matrix2): raise ValueError("Incompatible matrix dimensions for multiplication.")
     return [[sum(a * b for a, b in zip(row1, col)) for col in zip(*matrix2)] for row1 in matrix1]
 
 
@@ -361,7 +360,7 @@ def matrix_inverse(matrix):
 
 
 def mod_inverse(a, m):
-     """
+    """
     Computes the modular inverse of `a` modulo `m` using the Extended Euclidean Algorithm.
 
     The modular inverse is the number `x` such that:

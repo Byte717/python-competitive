@@ -1,3 +1,14 @@
+Metadata-Version: 2.4
+Name: python-competitive
+Version: 0.2
+Summary: A python module for competitive programmers
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: license-file
+Dynamic: summary
+
 # python-competitive
 
 **python-competitive* is a lightweight and growing Python library that provides a clean, well-documented collection of data structures and algorithms commonly used in computer science, competitive programming, and technical interviews.
